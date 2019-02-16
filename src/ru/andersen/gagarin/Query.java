@@ -2,7 +2,8 @@ package ru.andersen.gagarin;
 
 //запросы к бд
 public enum Query {
-    BackupDB("BACKUP DATABASE weatherdb TO DISK = 'C:\\WeatherDB\\testDB.bak';"),
+    //BackupDB("BACKUP DATABASE weatherdb TO DISK = 'C:\\WeatherDB\\testDB.bak';"),
+    BackupDB("mysqldump weatherdb > C:\\WeatherDB\\weatherdb.sql;"),
 
     DropDB("DROP DATABASE IF EXIST weatherdb;"),
 

@@ -13,6 +13,7 @@ public class UpdateDbService {
     private static String user = "root";
     private static String password = "12345";
 
+
     public static void rebuildDB() {
 
         //Где использовать try catch block? На том уровне, где достаточно информации.
@@ -30,12 +31,12 @@ public class UpdateDbService {
             createDB(c);
             createTables(c);
             createFK(c);
-
-            //какое-то полезное действие, откуда мы получим наш результат, ResultSet.
-            ResultSet rs = getResultAction(c);
-
-            //Выводим данные на экран
-            System.out.println(rs.getString("Нужная нам колонка"));
+//
+//            //какое-то полезное действие, откуда мы получим наш результат, ResultSet.
+//            ResultSet rs = getResultAction(c);
+//
+//            //Выводим данные на экран
+//            System.out.println(rs.getString("Нужная нам колонка"));
 
             //Уведомляем о пересоздании БД
             System.out.println("БД была пересоздана");
