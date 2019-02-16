@@ -9,9 +9,9 @@ import static ru.andersen.gagarin.DataBaseActions.*;
 
 
 public class UpdateDbService {
-    private static String url = "";
-    private static String user = "";
-    private static String password = "";
+    private static String url = "jdbc:mysql://localhost:3306/weatherdb";
+    private static String user = "root";
+    private static String password = "12345";
 
     public static void rebuildDB() {
 
