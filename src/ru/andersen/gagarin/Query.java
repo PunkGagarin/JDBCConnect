@@ -2,12 +2,14 @@ package ru.andersen.gagarin;
 
 //запросы к бд
 public enum Query {
-    //BackupDB("BACKUP DATABASE weatherdb TO DISK = 'C:\\WeatherDB\\testDB.bak';"),
-    BackupDB("mysqldump weatherdb > C:\\WeatherDB\\weatherdb.sql;"),
+    BackupDB("BACKUP DATABASE weatherdb TO DISK = 'C:\\WeatherDB\\testDB.bak'"),
+//    BackupDB("mysqldump weatherdb > C:\\WeatherDB\\weatherdb.sql;"),
 
-    DropDB("DROP DATABASE IF EXIST weatherdb;"),
+    DropDB("DROP DATABASE IF EXISTS weatherdb;"),
 
     CreateDB("CREATE DATABASE weatherdb;"),
+
+    UseDB("USE weatherdb;"),
 
     LocationTable("CREATE TABLE location (" +
             "CityID int(5) AUTO_INCREMENT NOT NULL," +
@@ -73,33 +75,39 @@ public enum Query {
             "PRIMARY KEY (DateID)" +
             ");"),
 
-    FK_TypeUser("ALTER TABLE user " +
-            "ADD CONSTRAINT FK_TypeUser" +
-            "FOREIGN KEY (Type) REFERENCES usertype(UserTypeID);"),
+    FK_TypeUser("ALTER TABLE user \n" +
+            "ADD CONSTRAINT FK_TypeUser\n" +
+            "FOREIGN KEY (Type) REFERENCES \tusertype(UserTypeID);"),
 
-    FK_LocationUser("ALTER TABLE user " +
-            "ADD CONSTRAINT FK_LocationUser" +
-            "FOREIGN KEY (Location) REFERENCES location(CityID);"),
+    FK_LocationUser("ALTER TABLE user \n" +
+            "ADD CONSTRAINT FK_LocationUser\n" +
+            "FOREIGN KEY (Location) REFERENCES \tlocation(CityID);"),
 
     FK_WindWeather("ALTER TABLE weatherchar" +
-            "ADD CONSTRAINT FK_WindWeather" +
-            "FOREIGN KEY (Wind) REFERENCES windchar(WindID);"),
+            " ADD CONSTRAINT FK_WindWeather" +
+            " FOREIGN KEY (Wind) REFERENCES windchar(WindID);"),
 
     FK_SkyWeather("ALTER TABLE weatherchar" +
-            "ADD CONSTRAINT FK_SkyWeather" +
-            "FOREIGN KEY (Sky) REFERENCES skychar(SkyID);"),
+            " ADD CONSTRAINT FK_SkyWeather" +
+            " FOREIGN KEY (Sky) REFERENCES skychar(SkyID);"),
 
     FK_LocationDate("ALTER TABLE date" +
-            "ADD CONSTRAINT FK_LocationDate" +
-            "FOREIGN KEY (Location) REFERENCES location(CityID);"),
+            " ADD CONSTRAINT FK_LocationDate" +
+            " FOREIGN KEY (Location) REFERENCES location(CityID);"),
 
     FK_WeatherDate("ALTER TABLE date" +
-            "ADD CONSTRAINT FK_WeatherDate" +
-            "FOREIGN KEY (Weather) REFERENCES weatherchar(WeatherID);"),
+            " ADD CONSTRAINT FK_WeatherDate" +
+            " FOREIGN KEY (Weather) REFERENCES weatherchar(WeatherID);"),
 
     FK_StuffDate("ALTER TABLE date" +
-            "ADD CONSTRAINT FK_StuffDate" +
-            "FOREIGN KEY (Stuff) REFERENCES stuff(StuffID);");
+            " ADD CONSTRAINT FK_StuffDate" +
+            " FOREIGN KEY (Stuff) REFERENCES stuff(StuffID);"),
+
+    InsertIntoWind("INSERT INTO `windchar` (`WindName`,`Speed`,`Direction`,`Points`) VALUES ('Штиль',1,'ЮВ',0);"),
+
+    InsertIntoWind2("INSERT INTO `windchar` (`WindName`,`Speed`,`Direction`,`Points`) VALUES ('Ураган',20,'СВ',10);"),
+
+    InsertIntoWeather("INSERT INTO weatherchar (`Temperature`,`Pressure`,`Wind`,`Sky`) VALUES ( 30,200,1,null);");
 
 
     private String query;

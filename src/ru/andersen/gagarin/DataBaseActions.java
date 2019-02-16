@@ -18,6 +18,7 @@ public class DataBaseActions {
     }
 
     static void createTables(Connection c) throws SQLException{
+        useDB(c);
         createLocationTable(c);
         createStuffTable(c);
         createUserTypeTable(c);
@@ -28,6 +29,9 @@ public class DataBaseActions {
         createDateTable(c);
     }
 
+    private static void useDB(Connection c) throws SQLException{
+        execute(c,Query.UseDB);
+    }
     private static void createLocationTable(Connection c) throws SQLException{
         execute(c,Query.LocationTable);
     }
@@ -71,8 +75,15 @@ public class DataBaseActions {
         execute(c,Query.FK_StuffDate);
     }
 
+    static void insertInfo(Connection c) throws SQLException{
+        execute(c,Query.InsertIntoWind);
+        execute(c,Query.InsertIntoWind2);
+        execute(c,Query.InsertIntoWeather);
+
+    }
+
     static ResultSet getResultAction(Connection c) throws SQLException{
-        return c.prepareStatement("asdf").executeQuery();
+        return c.prepareStatement("SELECT * FROM weatherdb.windchar;").executeQuery();
     }
 
     private static void execute(Connection c, Query q) throws SQLException{

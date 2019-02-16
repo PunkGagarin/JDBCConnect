@@ -9,7 +9,7 @@ import static ru.andersen.gagarin.DataBaseActions.*;
 
 
 public class UpdateDbService {
-    private static String url = "jdbc:mysql://localhost:3306/weatherdb";
+    private static String url = "jdbc:mysql://localhost:3306/weatherdb?autoReconnect=true&useSSL=false";
     private static String user = "root";
     private static String password = "12345";
 
@@ -26,17 +26,19 @@ public class UpdateDbService {
 
         try (Connection c = DriverManager.getConnection(url, user, password)) {
             //наши стейтменты
-            backupDB(c);
+            //backupDB(c);
             dropDB(c);
             createDB(c);
             createTables(c);
             createFK(c);
-//
-//            //какое-то полезное действие, откуда мы получим наш результат, ResultSet.
-//            ResultSet rs = getResultAction(c);
-//
-//            //Выводим данные на экран
-//            System.out.println(rs.getString("Нужная нам колонка"));
+            insertInfo(c);
+
+            //какое-то полезное действие, откуда мы получим наш результат, ResultSet.
+            ResultSet rs = getResultAction(c);
+
+            //Выводим данные на экран
+            if(rs.next())
+            System.out.println("Сегодня "+rs.getString("WindName"));
 
             //Уведомляем о пересоздании БД
             System.out.println("БД была пересоздана");
